@@ -1,0 +1,27 @@
+# EditorConfig root file
+root = true
+
+# Default settings for all файлууд
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+max_line_length = 120
+
+# TypeScript болон JavaScript файлуудын хувьд
+[*.{ts,tsx,js,jsx,json}]
+indent_style = space
+indent_size = 2
+max_line_length = 120
+
+# Markdown файлуудын хувьд
+[*.md]
+trim_trailing_whitespace = false
+
+# YAML файлуудын хувьд
+[*.{yml,yaml}]
+indent_style = space
+indent_size = 2
