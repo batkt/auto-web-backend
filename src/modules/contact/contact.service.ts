@@ -8,7 +8,9 @@ export class ContactService {
       query.$text = { $search: search };
     }
 
+    // ✨ createdAt descending (шинэ мессеж эхэнд)
     const messages = await ContactModel.find(query)
+      .sort({ createdAt: -1 }) // 🔥 гол хэсэг
       .skip((page - 1) * limit)
       .limit(limit)
       .lean();
