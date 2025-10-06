@@ -8,6 +8,9 @@ import { errorHandler } from './middleware/error.middleware';
 import { authRouter } from './modules/auth/auth.routes';
 import { authenticate } from './middleware/auth.middleware';
 import { userRouter } from './modules/user/user.routes';
+import productRouter from './modules/products/product.routes';
+import brandRouter from './modules/brands/brands.routes';
+
 import sectionRouter from './modules/section/section.routes';
 import pageRouter from './modules/page/page.routes';
 import fileRouter from './modules/file/file.routes';
@@ -66,6 +69,9 @@ app.use('/api', blogRouter);
 app.use('/api', categoryRouter);
 app.use('/api/contact', contactRouter);
 app.use('/api', surveyRouter);
+app.use('/api/products', productRouter);
+// app.use('/api', brandRouter);
+app.use('/api', brandRouter);
 
 // Health check endpoint
 app.get('/health', (req, res) => {
