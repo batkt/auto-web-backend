@@ -13,10 +13,10 @@ interface IContact extends Document {
 const ContactSchema: Schema = new Schema(
   {
     firstName: { type: String, required: true },
-    lastName: { type: String, required: true },
+
     email: { type: String, required: true },
     phone: { type: String, required: true },
-    subject: { type: String, required: true },
+
     message: { type: String, required: true },
     status: { type: String, default: 'unseen' }, // Default status is 'unseen'
   },
