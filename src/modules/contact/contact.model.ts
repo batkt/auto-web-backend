@@ -2,10 +2,10 @@ import mongoose, { Schema, Document } from 'mongoose';
 
 interface IContact extends Document {
   firstName: string;
-  lastName: string;
+
   email: string;
   phone: string;
-  subject: string;
+
   message: string;
   status: string; // New field for message status
 }
@@ -25,7 +25,7 @@ const ContactSchema: Schema = new Schema(
   },
 );
 
-ContactSchema.index({ firstName: 'text', lastName: 'text', email: 'text', phone: 'text', subject: 'text' });
+ContactSchema.index({ firstName: 'text', email: 'text', phone: 'text' });
 
 const ContactModel = mongoose.model<IContact>('Contact', ContactSchema);
 
