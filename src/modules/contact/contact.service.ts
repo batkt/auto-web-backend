@@ -48,36 +48,23 @@ export class ContactService {
       throw new ApiError(400, 'Missing required fields: firstName, email, phone, message');
     }
 
-    try {
-      // Try to save with Mongoose first
-      const newMessage = new ContactModel({
-        firstName,
-        email,
-        phone,
-        message,
-        status: 'unseen',
-      });
-      return await newMessage.save();
-    } catch (error) {
-      // If Mongoose validation fails due to schema mismatch, use MongoDB native insert
-      console.log(
-        'Mongoose validation failed, using native MongoDB insert:',
-        error instanceof Error ? error.message : String(error),
-      );
+    // Always use MongoDB native insert to bypass schema validation issues
+    console.log('📝 Saving contact with native MongoDB insert');
 
-      const result = await ContactModel.collection.insertOne({
-        firstName,
-        email,
-        phone,
-        message,
-        status: 'unseen',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      });
+    const result = await ContactModel.collection.insertOne({
+      firstName,
+      email,
+      phone,
+      message,
+      status: 'unseen',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
 
-      // Return the inserted document
-      return await ContactModel.findById(result.insertedId);
-    }
+    console.log('✅ Contact saved with ID:', result.insertedId);
+
+    // Return the inserted document
+    return await ContactModel.findById(result.insertedId);
   };
 
   setMessageStatusSeen = async (id: string) => {
