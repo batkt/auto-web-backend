@@ -34,7 +34,15 @@ export class ContactService {
   };
 
   saveMessage = async (data: any) => {
-    const newMessage = new ContactModel(data);
+    // Handle case where data is sent as an array - take the first element
+    const contactData = Array.isArray(data) ? data[0] : data;
+
+    // Validate that we have the required data
+    if (!contactData || typeof contactData !== 'object') {
+      throw new ApiError(400, 'Invalid contact data provided');
+    }
+
+    const newMessage = new ContactModel(contactData);
     return await newMessage.save();
   };
 
