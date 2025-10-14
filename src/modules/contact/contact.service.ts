@@ -42,7 +42,10 @@ export class ContactService {
       throw new ApiError(400, 'Invalid contact data provided');
     }
 
-    const newMessage = new ContactModel(contactData);
+    // Use the contact data as is (no default values needed)
+    const processedData = contactData;
+
+    const newMessage = new ContactModel(processedData);
     return await newMessage.save();
   };
 

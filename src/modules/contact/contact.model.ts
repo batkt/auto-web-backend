@@ -2,10 +2,8 @@ import mongoose, { Schema, Document } from 'mongoose';
 
 interface IContact extends Document {
   firstName: string;
-
   email: string;
   phone: string;
-
   message: string;
   status: string; // New field for message status
 }
@@ -13,10 +11,8 @@ interface IContact extends Document {
 const ContactSchema: Schema = new Schema(
   {
     firstName: { type: String, required: true },
-
     email: { type: String, required: true },
     phone: { type: String, required: true },
-
     message: { type: String, required: true },
     status: { type: String, default: 'unseen' }, // Default status is 'unseen'
   },
@@ -25,7 +21,12 @@ const ContactSchema: Schema = new Schema(
   },
 );
 
-ContactSchema.index({ firstName: 'text', email: 'text', phone: 'text' });
+ContactSchema.index({
+  firstName: 'text',
+  email: 'text',
+  phone: 'text',
+  message: 'text',
+});
 
 const ContactModel = mongoose.model<IContact>('Contact', ContactSchema);
 
